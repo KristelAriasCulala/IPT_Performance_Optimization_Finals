@@ -1,0 +1,53 @@
+﻿@using StackExchange.Profiling
+@addTagHelper *, MiniProfiler.AspNetCore.Mvc
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - IPT_Act_2_Finals</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/IPT_Act_2_Finals.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Group4_Act#2</a>
+                @if (!(ViewContext.RouteData.Values["controller"]?.ToString() == "User" && ViewContext.RouteData.Values["action"]?.ToString() == "Login"))
+                {
+                    <div class="collapse navbar-collapse justify-content-end">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link logout-link" asp-controller="User" asp-action="Logout">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                }
+            </div>
+        </nav>
+        @if (ViewBag.ShowBanner == true)
+        {
+            <div class="banner">
+                <div class="container-fluid">
+                    <h1 class="text-left text-white py-2">@ViewData["Title"]</h1>
+                    <p class="text-left text-white">Welcome to the User Dashboard!</p>
+                </div>
+            </div>
+        }
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <mini-profiler />
+</body>
+</html>
